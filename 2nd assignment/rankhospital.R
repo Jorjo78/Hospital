@@ -42,7 +42,3 @@ rankhospital <- function(state, outcome, num) {
 
 
 rankhospital("MD", "heart attack", "worst")
-
-
-####------
-df6[(nrow(df5)-num):nrow(df5), ]        # alternatively: dplyr: sort?order?
