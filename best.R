@@ -55,33 +55,3 @@ best <- function(state, outcome) {
 best("MD", "pneumonia")
 
 
-##-------trials: 4 week assignment (Finding the best hospital in a state)
-setwd("/Users/giorgiocavallo/Desktop/GIORGIO/COURSERA/ProgrammingAssignment3/rprog-data-ProgAssignment3-data/")
-df <-read.csv("outcome-of-care-measures.csv", colClasses = "character")
-df2 <- df[which(df$State == "AL"), ]
-View(df2)
-df3 <- df2[which(df2$Hospital.30.Day.Death..Mortality..Rates.from.Heart.Attack != "Not Available"), ]
-View(df3)
-
-df4 <- df3[which.min(df3$Hospital.30.Day.Death..Mortality..Rates.from.Heart.Attack), c("Hospital.Name", "Hospital.30.Day.Death..Mortality..Rates.from.Heart.Attack")]
-        
-View(df3)
-
-df4 <- df3[which.min(df3$Hospital.30.Day.Death..Mortality..Rates.from.Heart.Attack),]
-View(df4)
-        
-a <- outcome %in% c("heart attack","heart failure","pneumonia")
-b <- outcome == "heart attack" | outcome == "heart failure" | outcome == "pneumonia"
-
-x <- c(1,2)
-names(x) <- c("bob", "ed")
-x
-
-class(x)
-x$ed
-
-
-
-##
-##ciao ci sei
-##sei li
