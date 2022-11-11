@@ -1,6 +1,6 @@
 rm(list = ls())
 
-rankhospital <- function(state, outcome, num = 4) {
+rankhospital <- function(state, outcome, num) {
         
         setwd("/Users/giorgiocavallo/Desktop/GIORGIO/COURSERA/ProgrammingAssignment3/rprog-data-ProgAssignment3-data/")
         df <-read.csv("outcome-of-care-measures.csv")
@@ -17,33 +17,31 @@ rankhospital <- function(state, outcome, num = 4) {
 
         ## return hospital name in that state with lowest 30-day death rate
         df3 <-  df[which(df$State == state),]
-        
         if (outcome == "heart failure") {
-                df4 <- df3[which(df3[ ,11] != "Not Available"), ]
-                df5 <- df4[, c("Hospital.Name", "Hospital.30.Day.Death..Mortality..Rates.from.Heart.Failure")]
-                df6 <- df5[as.numeric(df5$Hospital.30.Day.Death..Mortality..Rates.from.Heart.Failure),]
-                
-                df7 <- df6[with(df6, order(df6$Hospital.30.Day.Death..Mortality..Rates.from.Heart.Failure, df6$Hospital.Name)),]
-                View(df7)
-                return(df6 <- df7[num, ])      
-        }
-        if (outcome == "heart attack") {
-                df4 <- df3[which(df3[ ,11] != "Not Available"), ]
-                df5 <- df4[, c("Hospital.Name", "Hospital.30.Day.Death..Mortality..Rates.from.Heart.Failure")]
-                df6 <- df5[order(as.numeric(df5$Hospital.30.Day.Death..Mortality..Rates.from.Heart.Failure)),]
-                return(df6 <- df6[num, ])
-        }
+                col <- 17}
+        if (outcome  == "heart attack") {
+                col <- 11}
         if (outcome == "pneumonia") {
-                df4 <- df3[which(df3[ ,11] != "Not Available"), ]
-                df5 <- df4[, c("Hospital.Name", "Hospital.30.Day.Death..Mortality..Rates.from.Heart.Failure")]
-                df6 <- df5[order(as.numeric(df5$Hospital.30.Day.Death..Mortality..Rates.from.Heart.Failure)),]
-                return(df6 <- df6[num, ]) 
-        }
+                col <- 23}
+
+        
+        df4 <- df3[which(df3[ ,col] != "Not Available"), ]
+        df4[,col] <- as.numeric(df4[,col])
+        df5 <- df4[order(df4[,col],df4[,2]),]
+        
+        if (num == "best") {
+           return(head(df5$Hospital.Name,1))}
+        
+        else if (num == "worst") {
+           return(tail(df5$Hospital.Name,1))}
+        
+        else  {
+                return(df5[num,2])}
 }
 
 
 
-rankhospital("MD", "heart attack", )
+rankhospital("MD", "heart attack", "worst")
 
 
 ####------
